@@ -1,0 +1,36 @@
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px 130px;
+    margin: 40px 200px;
+
+    .product-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+        width: 20%;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+
+
+        &:hover {
+            color: #ffca4e;
+        }
+
+        .product-name{
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .product-price {
+            align-self: flex-end;
+        }
+    }
+
+    img {
+        border-radius: 4px;
+    }
+}

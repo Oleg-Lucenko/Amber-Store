@@ -1,0 +1,46 @@
+main {
+
+    .discounts-head {
+        text-align: center;
+    }
+
+    .discount-slider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        margin: 0 0 50px 0;
+
+        button {
+            border-style: solid;
+            background: none;
+            border-color: grey;
+            border-width: 2px 0 0 2px;
+            transform: rotate(-45deg);
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+
+            &:hover {
+                border-color: #ffd526;
+            }
+        }
+
+        .slider-btn-left {
+            border-width: 2px 0 0 2px;
+            transform: rotate(-45deg);
+        }
+
+        .slider-btn-right {
+            border-width: 2px 2px 0 0;
+            transform: rotate(45deg);
+        }
+
+        img {
+            border-radius: 8px;
+        }
+    }
+
+}
+
+

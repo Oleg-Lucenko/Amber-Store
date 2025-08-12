@@ -1,0 +1,38 @@
+@use './products.scss' as *;
+@use './product.scss' as *;
+@use './fonts' as *; 
+
+@use 'components/header' as *;
+@use 'components/main' as *; 
+@use 'components/footer' as *; 
+
+body {
+    font: 14px 'Roboto';
+    font-weight: 400;
+    margin: 0;
+    color: #000;
+    background-color: #E8E7E2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+
+
+    a {
+        color: #000;
+        text-decoration: none;
+
+        &:hover {
+            color: #F9FF29;
+        }
+    }
+
+}

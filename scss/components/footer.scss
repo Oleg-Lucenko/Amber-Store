@@ -1,0 +1,46 @@
+footer {
+
+    background-color: #ffde9b;
+    display: flex;
+    justify-content: space-around;
+    margin-top: auto;
+
+
+    .footer-amber-about {
+        display: flex;
+        width: 40%;
+        gap: 50px;
+        padding: 20px 0;
+
+        .logo2 {
+            height: 120px;
+            width: 140px;
+        }
+
+        &::after {
+            content: '';
+            border-right: 2px solid rgb(239 200 111 / 56%);
+            height: 100%;
+        }
+    }
+
+    .footer-categories .nav-list li{
+        margin: 4px 0;
+    }
+
+    .footer-pages li {
+        margin: 4px 0;
+    }
+
+    .footer-contacts {
+        span {
+            display: block;
+            margin: 10px 0;
+        }
+    }
+
+}
+
+
+
+
