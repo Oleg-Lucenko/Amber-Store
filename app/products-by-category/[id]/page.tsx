@@ -8,7 +8,7 @@ import {PageParams} from '../../../types/PageParams';
  
 export default async function ProductPage({params}: PageParams) {
     const { id } = await params;
-    const res = await fetch(`http://localhost:3001/category/${id}/products`);
+    const res = await fetch(`https://amber-store-backend.onrender.com/category/${id}/products`);
     const products: Product[] = await res.json();
     
     if (!products) return <p>Products not found</p>;

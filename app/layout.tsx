@@ -12,7 +12,7 @@ interface LayoutProps {
 
 export default async function RootLayout({ children }: LayoutProps) {
 
-  const res = await fetch('http://localhost:3001/categories');
+  const res = await fetch('https://amber-store-backend.onrender.com/categories');
   const categories = await res.json();
 
   return (
