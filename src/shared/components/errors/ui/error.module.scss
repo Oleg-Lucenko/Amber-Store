@@ -1,0 +1,44 @@
+@use '@shared/styles/variables' as *;
+
+.errorWrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 290px);
+    align-items: center;
+    justify-content: center;
+}
+
+
+.errorContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    min-width: 300px;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+
+.actionsContainer {
+    display: flex;
+}
+
+.tryAgainBtn {
+    padding: 5px;
+    margin: 4px;
+}
+
+.action {
+    padding: 5px;
+    margin: 4px;
+    background-color: $color-button;
+    border-radius: 4px;
+
+    &:hover {
+        color: black;
+        background-color: $color-btnHover;
+    }
+}
+

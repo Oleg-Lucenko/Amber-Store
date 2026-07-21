@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Brand {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("brands")
+}
+
+model Category {
+  id       Int        @id @default(autoincrement())
+  name     String
+  slug     String    @unique
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  imgPath     String  @map("img_path")
+  description String
+  price       Int
+  categoryId  Int    @map("category_id")   
+  slug        String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_categoryid")
+
+  @@map("products")
+}

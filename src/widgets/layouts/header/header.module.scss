@@ -1,0 +1,137 @@
+@use '@shared/styles/variables' as *;
+
+
+    .headerTop {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 30px;
+        background-color: #fbc43e;
+
+        .numberContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin: 6px 0;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .accountActions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 14%;
+
+            .signIn {
+
+                .signInIcon {
+                    width: 25px;
+                    height: 20px;
+                    margin-right: 5px;
+                    vertical-align: middle;
+                    fill: #000;
+                }
+
+                &:hover {
+                    .signInIcon {
+                        fill: $yellow;
+                    }
+                }
+
+
+            }
+
+            .register {
+
+                .registerIcon {
+                    width: 25px;
+                    height: 20px;
+                    margin-right: 5px;
+                    vertical-align: middle;
+                    fill: #000;
+                }
+
+                &:hover {
+                    .registerIcon {
+                        fill: $yellow;
+                    }
+                }
+            }
+        }
+    }
+
+    .headerMain {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 50px;
+        justify-content: space-between;
+        background-color: $beige-yellow;
+
+        .headerMainLeft {
+            display: flex;
+            width: 70%;
+            gap: 100px;
+
+
+            .logo {
+                display: block;
+                height: 70px;
+                width: 100px;
+            }
+        
+            nav {
+                display: block;
+                align-content: center;
+            }
+        
+            .navList {
+                display: flex;
+        
+                li {
+                    display: block;
+                    position: relative;
+                    text-align: center;
+        
+                    .navLink {
+                        padding: 10px 24px;
+                        margin: 0 5px;
+                        font-size: 16px;
+                        display: block;
+                        border-radius: 4px;
+                    }
+        
+                }
+        
+            }
+        }
+
+
+        .cart {
+            align-self: center;
+
+            &::before {
+                content: '';
+                background-image: url('/img/Cart.svg');
+                background-repeat: no-repeat;
+                vertical-align: middle;
+                background-size: contain;
+                display: inline-block;
+                width: 40px;
+                height: 30px;                    
+            }
+
+            &:hover {
+                color: #F9FF29;
+
+                &::before {
+                    background-image: url('/img/Cart-changed.svg');
+                }
+            }
+        }
+
+    }
+
+
