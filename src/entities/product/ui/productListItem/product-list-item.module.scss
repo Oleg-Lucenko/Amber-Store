@@ -1,0 +1,35 @@
+@use '@shared/styles/variables' as *;
+
+.productItem {
+    width: 25%;
+    
+    
+    .productLink {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 6px;
+        padding: 10px;
+        background-color: #fff;
+        cursor: pointer;
+
+
+        &:hover {
+            color: $dark-yellow;
+        }
+
+        img {
+            border-radius: 4px;
+        }
+
+        .productName{
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .productPrice {
+            align-self: flex-end;
+        }
+    }
+
+}
