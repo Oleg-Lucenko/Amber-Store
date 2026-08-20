@@ -3,7 +3,7 @@
 
 export const sliderData = [
   {
-    imgPath: '/img/discount_galaxy_s21.jpg', 
+    imgPath: '/img/discount_galaxy_s21.webp', 
     pageLink: '/Smartphones/Samsung-Galaxy-S21',
     name: 'Samsung Galaxy S21',
     currentPrice: 312.74, 
@@ -11,7 +11,7 @@ export const sliderData = [
     alt: 'galaxy s21'
   },
   {
-    imgPath: '/img/discount_iphone_16.jpg', 
+    imgPath: '/img/discount_iphone_16.webp', 
     pageLink: '/Smartphones/Apple-iphone-16-Pro',
     name: 'Iphone 16 pro',
     currentPrice: 925.57, 
@@ -19,7 +19,7 @@ export const sliderData = [
     alt: 'iphone 16 pro'
   },
   {
-    imgPath: '/img/discount_jbl.jpg',
+    imgPath: '/img/discount_jbl.webp',
     pageLink: '/Headphones/JBL-Tune-Flex-True-Wireless',
     name: 'JBL Tune 770NC',
     currentPrice: 95.77, 
