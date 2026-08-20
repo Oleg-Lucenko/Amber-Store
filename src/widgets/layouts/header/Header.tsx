@@ -4,6 +4,7 @@ import Image from 'next/image';
 import SignInIcon from '@images/sign-in.svg';
 import RegisterIcon from '@images/register.svg';
 import type { Category } from '@entities/category/types';
+import { Cart } from "@features/cart";
 
 
 export default async function Header({categories}: {categories: Category[]}) {
@@ -60,7 +61,7 @@ export default async function Header({categories}: {categories: Category[]}) {
                 </div>
 
                 
-                <Link href="#" className={styles.cart}>Cart</Link>
+                <Cart />
 
             </div>
             

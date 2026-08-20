@@ -6,10 +6,14 @@ import styles from "./product-list-item.module.scss";
 
 
 
-export function ProductListItem({name, imgPath, slug, priceDollars, categorySlug}: ProductListItemProps) {
-
-
-
+export function ProductListItem({
+  name,
+  imgPath,
+  slug,
+  priceDollars,
+  categorySlug,
+  actions,
+}: ProductListItemProps) {
     return (
 
         <li className={styles.productItem}>
@@ -18,6 +22,7 @@ export function ProductListItem({name, imgPath, slug, priceDollars, categorySlug
                 <span className={styles.productName}>{name}</span>
                 <span className={styles.productPrice}>$ {priceDollars}</span>            
             </Link>
+            {actions}
         </li>
 
     )
