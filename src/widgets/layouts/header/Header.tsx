@@ -5,14 +5,15 @@ import SignInIcon from '@images/sign-in.svg';
 import RegisterIcon from '@images/register.svg';
 import type { Category } from '@entities/category/types';
 import { Cart } from "@features/cart";
+import { HeaderNav } from './HeaderNav';
 
 
-export default async function Header({categories}: {categories: Category[]}) {
 
+export default function Header({categories}: {categories: Category[]}) {
 
     return (
 
-        <header>
+        <header className={styles.header}>
             <div className={styles.headerTop}>
                 <div className={styles.numberContainer}>
                     <p>Speak to the manager on:</p>
@@ -34,29 +35,11 @@ export default async function Header({categories}: {categories: Category[]}) {
 
             <div className={styles.headerMain}>
 
-                <div className={styles.headerMainLeft}>
+                <div className={styles.headerLogoContainer}>
                     
                     <Link href="/"><Image src="/img/logo.png" width={100} height={70} className={styles.logo} alt='logo'/></Link>
             
-                    <nav aria-label='Categories navigation'>
-                        <ul className={styles.navList}>
-                            <li key={'nav-catalog'}>
-                                    <Link href={'/all-products'} className={styles.navLink}>
-                                        All products
-                                    </Link>
-                            </li>
-
-                            {categories.map(category => (
-                                        <li key={`nav-cat-${category.id}`}>
-                                            <Link href={`/${category.name}`} className={styles.navLink}>
-                                                {category.name}
-                                            </Link>
-                                        </li>
-                                    ))  
-                            }
-
-                        </ul>
-                    </nav>
+                    <HeaderNav categories={categories} />
 
                 </div>
 
