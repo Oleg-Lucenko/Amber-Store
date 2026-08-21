@@ -1,52 +1,111 @@
-@use '@shared/styles/variables' as *;
-
+@use "@shared/styles/variables" as *;
 
 .footer {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  align-items: start;
+  gap: 20px;
+  margin-top: auto;
+  padding: 32px 24px;
+  background-color: $beige-yellow;
 
-    background-color: $beige-yellow;
-    display: flex;
-    justify-content: space-around;
-    margin-top: auto;
+  h3 {
+    margin: 0 0 14px;
+    font-size: 16px;
+  }
 
-
-    .amberAbout {
-        display: flex;
-        width: 40%;
-        gap: 50px;
-        padding: 20px 0;
-        
-        .logo2 {
-            height: 120px;
-            width: 140px;
-        }
-
-        &::after {
-            content: '';
-            border-right: 2px solid rgb(239 200 111 / 56%);
-            height: 100%;
-        }
-    }
-
-    .navigation {
-        display: flex;
-        gap: 50px;
-
-        li {
-            margin: 4px 0;
-        }  
-
-    }
-
-
-    .contacts {
-        li {
-            display: block;
-            margin: 10px 0;
-        }
-    }
-
+  li {
+    margin-top: 7px;
+  }
 }
 
+.amberAbout {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 24px;
+  padding-right: 24px;
+  border-right: 1px solid rgba(3, 3, 3, 0.12);
 
+  p {
+    max-width: 360px;
+    margin: 4px 0 0;
+    line-height: 1.55;
+  }
+}
 
+.logo2 {
+  display: block;
+  width: 120px;
+  height: auto;
+}
 
+.categories,
+.pages,
+.contacts {
+  min-width: 0;
+}
+
+.contacts a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1000px) {
+  .footer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .amberAbout {
+    grid-column: 1 / -1;
+    justify-content: center;
+    padding: 0 0 16px;
+    border-right: 0;
+    border-bottom: 1px solid rgb(0 0 0 / 12%);
+
+    p {
+      display: none;
+    }
+  }
+
+  .logo2 {
+    width: 76px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px 12px;
+    padding: 18px 14px;
+
+    h3 {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-top: 5px;
+    }
+  }
+
+  .amberAbout {
+    padding-bottom: 12px;
+  }
+
+  .logo2 {
+    width: 68px;
+  }
+
+  .contacts {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .footer {
+    gap: 16px 10px;
+    padding-inline: 12px;
+  }
+}
