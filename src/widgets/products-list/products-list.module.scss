@@ -9,3 +9,24 @@
   width: min(1180px, calc(100% - 48px));
   margin: 40px auto;
 }
+
+@media (max-width: 734px) {
+  .productsList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .productsList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: calc(100% - 24px);
+    margin-block: 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .productsList {
+    grid-template-columns: 1fr;
+  }
+}
