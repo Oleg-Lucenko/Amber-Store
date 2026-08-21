@@ -1,5 +1,9 @@
 @use '@shared/styles/variables' as *;
 
+    .header {
+        position: relative;
+        z-index: 20;
+    }
 
     .headerTop {
         display: flex;
@@ -65,15 +69,17 @@
 
     .headerMain {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         padding: 10px 50px;
-        justify-content: space-between;
         background-color: $beige-yellow;
 
-        .headerMainLeft {
+        .headerLogoContainer {
             display: flex;
-            width: 70%;
-            gap: 100px;
+            align-items: center;
+            flex: 1;
+            min-width: 0;
+            gap: 40px;
 
 
             .logo {
@@ -82,56 +88,172 @@
                 width: 100px;
             }
         
-            nav {
-                display: block;
-                align-content: center;
-            }
-        
-            .navList {
-                display: flex;
-        
-                li {
-                    display: block;
-                    position: relative;
-                    text-align: center;
-        
-                    .navLink {
-                        padding: 10px 24px;
-                        margin: 0 5px;
-                        font-size: 16px;
-                        display: block;
-                        border-radius: 4px;
-                    }
-        
-                }
-        
-            }
         }
-
-
-        .cart {
-            align-self: center;
-
-            &::before {
-                content: '';
-                background-image: url('/img/Cart.svg');
-                background-repeat: no-repeat;
-                vertical-align: middle;
-                background-size: contain;
-                display: inline-block;
-                width: 40px;
-                height: 30px;                    
-            }
-
-            &:hover {
-                color: #F9FF29;
-
-                &::before {
-                    background-image: url('/img/Cart-changed.svg');
-                }
-            }
-        }
-
     }
 
+    .navigation {
+        position: relative;
+    }
 
+    .navList {
+        display: flex;
+
+        li {
+            display: block;
+            text-align: center;
+        }
+    }
+
+    .navLink {
+        display: block;
+        margin: 0 5px;
+        padding: 10px 18px;
+        border-radius: 4px;
+        font-size: 16px;
+        white-space: nowrap;
+    }
+
+    .menuButton {
+        display: none;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        color: #000;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+    }
+
+    .menuIcon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+
+        span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: currentColor;
+            transition: transform 160ms ease, opacity 160ms ease;
+        }
+    }
+
+    .menuButtonOpen {
+        .menuIcon span:first-child {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menuIcon span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menuIcon span:last-child {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+    }
+
+    .mobileMenu {
+        display: none;
+    }
+
+@media (max-width: 1000px) {
+    .headerTop {
+        .accountActions {
+            width: auto;
+            gap: 18px;
+        }
+    }
+
+    .headerMain {
+        align-items: center;
+        gap: 18px;
+        padding-inline: 24px;
+
+        .headerLogoContainer {
+            width: auto;
+            min-width: 0;
+            gap: 24px;
+        }
+    }
+
+    .navList {
+        display: none;
+    }
+
+    .navigation {
+        position: static;
+    }
+
+    .menuButton {
+        display: grid;
+        place-items: center;
+    }
+
+    .mobileMenu {
+        position: absolute;
+        z-index: 20;
+        top: 100%;
+        left: 24px;
+        display: block;
+        width: min(280px, calc(100% - 48px));
+        overflow: hidden;
+        background-color: #fffdf8;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.14);
+        animation: menu-slide-down 160ms ease-out;
+
+        li {
+            display: block;
+            text-align: center;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        .navLink {
+            margin: 0;
+            padding: 14px 18px;
+        }
+    }
+}
+
+@keyframes menu-slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 620px) {
+
+    .numberContainer > p {
+        display: none;
+    }
+
+    .headerMain {
+        padding: 8px 14px;
+
+        .headerLogoContainer {
+            flex: 1;
+            gap: 8px;
+
+            .logo {
+                width: 72px;
+                height: auto;
+            }
+
+        }
+    }
+
+    .mobileMenu {
+        left: 14px;
+        width: min(280px, calc(100% - 28px));
+    }
+}
