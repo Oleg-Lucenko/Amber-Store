@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ReactNode } from 'react';
+import type { Category, Prisma, Product } from "@generated/prisma/client";
 
 export type { Product };
 
@@ -9,13 +9,19 @@ const productWithCategoryArgs = {
   },
 } satisfies Prisma.ProductDefaultArgs;
 
-
 export type ProductWithCategory = Prisma.ProductGetPayload<typeof productWithCategoryArgs>;
+
 export type ProductUI = Omit<Product, 'price'> & {
-    priceDollars: number;  
+  priceDollars: number;  
 };
+
 export type ProductWithCategoryUI = ProductUI & {
-    categorySlug: ProductWithCategory['category']['slug'];
+  categorySlug: ProductWithCategory['category']['slug'];
+};
+
+export type CategoryWithProducts = {
+  category: Category,
+  products: ProductWithCategoryUI[]
 };
 
 export type ProductCardProps = Pick<
@@ -23,6 +29,11 @@ export type ProductCardProps = Pick<
   "name" | "imgPath" | "priceDollars" | "description"
 > & {
   actions?: ReactNode;
+};
+
+export type ProductListProps = {
+  listName: string,
+  products: ProductWithCategoryUI[]
 };
 
 export type ProductListItemProps = Pick<

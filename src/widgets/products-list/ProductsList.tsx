@@ -1,15 +1,18 @@
 'use client'
 
-import { ProductListItem, ProductWithCategoryUI } from '@entities/product';
-import styles from './products-list.module.scss';
+import { ProductListItem } from "@entities/product";
 
 import { AddToCartButton } from "@features/cart";
 
-export function ProductsList({products}: {products: ProductWithCategoryUI[]}) {
+import { ProductListProps } from "@entities/product/types";
+import styles from "./products-list.module.scss";
 
-    return (
+export function ProductsList({ listName, products }: ProductListProps ) {
+  return (
+    <>
+      {listName && <h1 className={styles.categoryName}>{listName}</h1>}
 
-       <ul className={styles.productsList}>
+      <ul className={styles.productsList}>
         {products.map((product) => (
           <ProductListItem
             key={product.id}
@@ -32,7 +35,7 @@ export function ProductsList({products}: {products: ProductWithCategoryUI[]}) {
             }
           />
         ))}
-        </ul>
-
-    );
-};
+      </ul>
+    </>
+  );
+}
