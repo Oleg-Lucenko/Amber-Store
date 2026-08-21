@@ -104,6 +104,57 @@
 
     .img {
         border-radius: 8px;
+        width: 60vw;
+        height: 60vh;
     }
 
+}
+
+@media (max-width: 700px) {
+
+    .slider {
+        gap: 20px;
+
+        .content {
+            font-size: 18px
+        }
+    }
+
+    
+}
+
+
+@media (max-width: 520px) {
+
+    .slider {
+        gap: 6px;
+
+        .content {
+            font-size: 16px;
+
+            .name {
+                margin: 0 15px 0 0;
+            }
+        }
+    }
+
+    
+}
+
+
+@media (max-width: 420px) {
+
+    .slider {
+
+        .content {
+            font-size: 12px;
+
+        }
+
+        .img {
+            height: 40vh;
+        }
+    }
+
+    
 }
