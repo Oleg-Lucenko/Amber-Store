@@ -5,6 +5,7 @@ import {
   ProductUI,
   ProductWithCategory,
   ProductWithCategoryUI,
+  CategoryWithProducts
 } from "./types";
 import { notFound } from "next/navigation";
 
@@ -45,18 +46,18 @@ export async function getAllProducts(): Promise<
   }
 }
 
-export async function getProductsByCategory(
-  categoryName: string,
-): Promise<ProductWithCategoryUI[] | null> {
+export async function getCategoryWithProducts(
+  categorySlug: string,
+): Promise<CategoryWithProducts | null> {
   try {
-    const category = await prisma.category.findFirst({
+    const category = await prisma.category.findUnique({
       where: {
-        name: categoryName,
+        slug: categorySlug,
       },
     });
 
     if (!category) {
-      notFound();
+      return null;
     }
 
     const products = await prisma.product.findMany({
@@ -68,11 +69,11 @@ export async function getProductsByCategory(
       },
     });
 
-    if (products.length > 0) {
-      return products.map((product) => mapProductWithCategoryToUI(product));
-    } else {
-      return null;
-    }
+    return {
+      category, 
+      products: products.map((product) => mapProductWithCategoryToUI(product))
+    };
+
   } catch (error) {
     throw error;
   }
