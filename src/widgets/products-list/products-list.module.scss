@@ -1,3 +1,6 @@
+@use '@shared/styles/variables' as *;
+
+
 .categoryName {
   text-align: center;
 }
@@ -8,6 +11,45 @@
   gap: 28px;
   width: min(1180px, calc(100% - 48px));
   margin: 40px auto;
+}
+
+.sortContainer {
+  display: flex;
+  justify-content: end;
+  position: relative;
+}
+
+.sortBtn {
+  background-color: $color-button;
+  padding: 4px 6px;
+  border-radius: 0;
+  position: relative;
+
+
+
+
+  &:hover {
+    background-color: $color-btnHover;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background-color: rgba(30, 28, 25, 0.323);
+    top: 0;
+    right: 0;
+  }
+
+  &:last-child::after {
+    content: none;
+  }
+}
+
+.sortBtn.active {
+  background-color: $color-btnHover;
 }
 
 @media (max-width: 734px) {

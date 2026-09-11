@@ -6,10 +6,18 @@ import { AddToCartButton } from "@features/cart";
 
 import { ProductListProps } from "@entities/product/types";
 import styles from "./products-list.module.scss";
+import Link from "next/link";
 
-export function ProductsList({ listName, products }: ProductListProps ) {
+export function ProductsList({ listName, products, sort }: ProductListProps ) {
+
+
   return (
     <>
+      <div className={styles.sortContainer}>
+        <Link href='?sort=asc' className={`${styles.sortBtn} ${sort==='asc' ? styles.active : ''} `}>Lowest price first</Link>
+        <Link href='?sort=desc' className={`${styles.sortBtn} ${sort==='desc' ? styles.active : ''} `}>Highest price first</Link>
+      </div>
+
       {listName && <h1 className={styles.categoryName}>{listName}</h1>}
 
       <ul className={styles.productsList}>

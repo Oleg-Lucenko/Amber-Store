@@ -1,27 +1,46 @@
 import { ProductsList } from "@widgets/products-list/ProductsList";
 import { getCategoryWithProducts } from "@entities/product/actions";
-import { EmptyCategory } from "@entities/product";
+import { EmptyCategory, validateProductsQuery } from "@entities/product";
 import { notFound } from "next/navigation";
 
-export default async function ProductsByCategoryPage({
-  params,
-}: {
-  params: Promise<{ categorySlug: string }>;
-}) {
-  const { categorySlug } = await params;
+
+type params = Promise<{ categorySlug: string }>;
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 
-  const categoryProducts = await getCategoryWithProducts(categorySlug);
+export default async function ProductsByCategoryPage(
+  {params, searchParams}: { params: params, 
+  searchParams: SearchParams}
+) {
+   const { categorySlug } = await params;
+  const searchParamsData = await searchParams;
+
+  const sort = validateProductsQuery(searchParamsData);
+
+  if (sort === null) {
+    notFound();
+  }
+
+  const categoryProducts = await getCategoryWithProducts(
+    categorySlug,
+    sort
+  );
 
   if (categoryProducts === null) {
     notFound();
   }
 
-  const {category, products} = categoryProducts;
+  const { category, products } = categoryProducts;
 
   if (products.length === 0) {
     return <EmptyCategory />;
   }
 
-  return <ProductsList products={products} listName={category.name} />;
+  return (
+    <ProductsList
+      products={products}
+      listName={category.name}
+      sort={sort}
+    />
+  );
 };

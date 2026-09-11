@@ -33,7 +33,8 @@ export type ProductCardProps = Pick<
 
 export type ProductListProps = {
   listName: string,
-  products: ProductWithCategoryUI[]
+  products: ProductWithCategoryUI[],
+  sort?: 'asc' | 'desc'
 };
 
 export type ProductListItemProps = Pick<
@@ -42,3 +43,6 @@ export type ProductListItemProps = Pick<
 > & {
   actions?: ReactNode;
 };
+
+
+export type PriceSort = "asc" | "desc";

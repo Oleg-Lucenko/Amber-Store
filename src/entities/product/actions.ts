@@ -5,7 +5,8 @@ import {
   ProductUI,
   ProductWithCategory,
   ProductWithCategoryUI,
-  CategoryWithProducts
+  CategoryWithProducts, 
+  PriceSort
 } from "./types";
 import { notFound } from "next/navigation";
 
@@ -28,11 +29,13 @@ function mapProductWithCategoryToUI(
 }
 
 
-export async function getAllProducts(): Promise<
+export async function getAllProducts(sort?: PriceSort): Promise<
   ProductWithCategoryUI[]
 > {
   try {
     const products = await prisma.product.findMany({
+      orderBy: sort ?
+        {price: sort} : undefined,
       include: {
         category: true,
       },
@@ -48,6 +51,7 @@ export async function getAllProducts(): Promise<
 
 export async function getCategoryWithProducts(
   categorySlug: string,
+  sort?: PriceSort,
 ): Promise<CategoryWithProducts | null> {
   try {
     const category = await prisma.category.findUnique({
@@ -60,19 +64,22 @@ export async function getCategoryWithProducts(
       return null;
     }
 
-    const products = await prisma.product.findMany({
-      where: {
-        categoryId: category.id,
-      },
-      include: {
-        category: true,
-      },
-    });
+        const products = await prisma.product.findMany({
+          where: {
+            categoryId: category.id,
+          },
+          orderBy: sort ? 
+            { price: sort } : undefined,
+          include: {
+            category: true,
+          },
+        })
 
-    return {
-      category, 
-      products: products.map((product) => mapProductWithCategoryToUI(product))
-    };
+        return {
+          category, 
+          products: products.map((product) => mapProductWithCategoryToUI(product))
+        };
+
 
   } catch (error) {
     throw error;
@@ -96,3 +103,4 @@ export async function getProduct(productName: string): Promise<ProductUI> {
     throw error;
   }
 }
+
