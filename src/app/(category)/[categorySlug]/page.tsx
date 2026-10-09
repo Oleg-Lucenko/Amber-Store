@@ -1,5 +1,5 @@
 import { ProductsList } from "@widgets/products-list/ProductsList";
-import { getCategoryWithProducts } from "@entities/product/actions";
+import { getCategoryWithProducts } from "@entities/product/api/queries";
 import { EmptyCategory, validateProductsQuery } from "@entities/product";
 import { notFound } from "next/navigation";
 

@@ -12,16 +12,14 @@ const productWithCategoryArgs = {
 export type ProductWithCategory = Prisma.ProductGetPayload<typeof productWithCategoryArgs>;
 
 export type ProductUI = Omit<Product, 'price'> & {
-  priceDollars: number;  
+  priceDollars: number; 
+  categorySlug: ProductWithCategory["category"]["slug"];
 };
 
-export type ProductWithCategoryUI = ProductUI & {
-  categorySlug: ProductWithCategory['category']['slug'];
-};
 
 export type CategoryWithProducts = {
   category: Category,
-  products: ProductWithCategoryUI[]
+  products: ProductUI[]
 };
 
 export type ProductCardProps = Pick<
@@ -33,16 +31,17 @@ export type ProductCardProps = Pick<
 
 export type ProductListProps = {
   listName: string,
-  products: ProductWithCategoryUI[],
+  products: ProductUI[],
   sort?: 'asc' | 'desc'
 };
 
 export type ProductListItemProps = Pick<
-  ProductWithCategoryUI,
+  ProductUI,
   "name" | "imgPath" | "slug" | "priceDollars" | "categorySlug"
 > & {
   actions?: ReactNode;
 };
 
-
 export type PriceSort = "asc" | "desc";
+
+

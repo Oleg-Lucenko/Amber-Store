@@ -1,5 +1,5 @@
 import { ProductCard } from '@entities/product';
-import { getProduct } from '@entities/product/actions';
+import { getProduct } from '@entities/product/api/queries';
 import { AddToCartButton } from "@features/cart";
 
 
@@ -11,7 +11,7 @@ export default async function ProductPage({params}: {params: Promise<{categorySl
 
     
 
-        const product = await getProduct(productSlug);
+        const product = await getProduct(categorySlug, productSlug);
 
         return (
             <ProductCard 

@@ -1,4 +1,4 @@
-import type { ProductListItemProps } from "../../types";
+import type { ProductListItemProps } from "../../model/types";
 import { formatDollars } from "@shared/lib/money";
 import Image from "next/image";
 import Link from "next/link";

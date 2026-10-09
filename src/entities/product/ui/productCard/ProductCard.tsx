@@ -1,4 +1,4 @@
-import { ProductCardProps } from "../../types";
+import { ProductCardProps } from "../../model/types";
 import { formatDollars } from "@shared/lib/money";
 import Image from "next/image";
 import styles from "./product-card.module.scss";

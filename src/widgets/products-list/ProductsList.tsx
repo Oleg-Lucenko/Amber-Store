@@ -4,7 +4,7 @@ import { ProductListItem } from "@entities/product";
 
 import { AddToCartButton } from "@features/cart";
 
-import { ProductListProps } from "@entities/product/types";
+import { ProductListProps } from "@entities/product/model/types";
 import styles from "./products-list.module.scss";
 import Link from "next/link";
 
