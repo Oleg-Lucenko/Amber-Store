@@ -21,7 +21,7 @@ export default function DiscountsSlider() {
   const slide: Slide = sliderData[sliderCounter];
 
   return (
-    <section>
+    <section className={styles.sliderSection}>
       <h1 className={styles.discountsHead}>Discounts</h1>      
       <div className={styles.slider}>
 
