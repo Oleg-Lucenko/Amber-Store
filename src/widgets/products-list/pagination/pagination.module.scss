@@ -1,0 +1,122 @@
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+
+    .pagesList {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+
+        .pageLink {
+            padding: 4px 8px;
+            background-color: #d6d5d5;
+            margin: 0 5px;
+            border-radius: 4px;
+
+            &:hover {
+            color: #000;
+            background-color: #c1bfbf; 
+            }
+
+            &.active {
+                background-color: #c1bfbf;
+            }
+        }
+    }
+
+
+
+    .pagesBtn {
+        position: relative;
+        background-color: #d3d3d3;
+        height: 16px;
+        width: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #c1bfbf;
+        }
+    }
+
+    .pageBtnLeft {
+
+
+        &::before {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            background: none;
+            border-color: grey;
+            border-width: 2px 0 0 2px;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            border-width: 1px 0 0 1px;
+            transform: translate(-35%, -50%) rotate(-45deg) ;
+        }
+    }
+
+    .pageBtnRight {
+
+
+
+        &::before {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            background: none;
+            border-color: grey;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            border-width: 1px 1px 0 0;
+            transform: translate(-65%, -50%) rotate(45deg);
+        }
+    }
+
+}
+
+
+
+
+
+
+.pagesBtn {
+    position: relative;
+    background-color: #d3d3d3;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pageBtnLeft::before,
+.pageBtnRight::before {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 6px;
+    height: 6px;
+
+    border-style: solid;
+    border-color: grey;
+}
+
+.pageBtnLeft::before {
+    border-width: 1px 0 0 1px;
+    transform: translate(-35%, -50%) rotate(-45deg);
+}
+
+.pageBtnRight::before {
+    border-width: 1px 1px 0 0;
+    transform: translate(-65%, -50%) rotate(45deg);
+}

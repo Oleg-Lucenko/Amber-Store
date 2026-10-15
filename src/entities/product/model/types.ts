@@ -17,6 +17,11 @@ export type ProductUI = Omit<Product, 'price'> & {
 };
 
 
+export interface ProductsUIData {
+  products: ProductUI[],
+  totalPages: number
+};
+
 export type CategoryWithProducts = {
   category: Category,
   products: ProductUI[]
@@ -32,6 +37,8 @@ export type ProductCardProps = Pick<
 export type ProductListProps = {
   listName: string,
   products: ProductUI[],
+  totalPages?: number,
+  currentPage?: number,
   sort?: 'asc' | 'desc'
 };
 
@@ -44,4 +51,8 @@ export type ProductListItemProps = Pick<
 
 export type PriceSort = "asc" | "desc";
 
+export type QueryParams = {
+  page?: number,
+  sort?: PriceSort
+};
 

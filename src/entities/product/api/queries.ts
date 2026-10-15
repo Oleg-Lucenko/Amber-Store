@@ -1,10 +1,12 @@
 import prisma from "@shared/lib/prisma";
 import { centsToDollars } from "@shared/lib/money";
+import { pageSize, skip } from "@entities/product/model/pagination";
 import {
   ProductUI,
   ProductWithCategory,
   CategoryWithProducts,
-  PriceSort
+  PriceSort,
+  ProductsUIData,
 } from "../model/types";
 import { notFound } from "next/navigation";
 
@@ -24,21 +26,31 @@ function mapProductToUI(
 };
 
 export async function getAllProducts(
-  sort?: PriceSort
-): Promise<ProductUI[]> {
-    const products = await prisma.product.findMany({
-      orderBy: sort ?
-        {price: sort} : undefined,
+  pageNumber: number,
+  sort?: PriceSort,
+): Promise<ProductsUIData> {
+  const [products, totalProducts] = await Promise.all([
+    await prisma.product.findMany({
+      take: pageSize,
+      skip: skip(pageNumber),
+      orderBy: sort ? { price: sort } : undefined,
       include: {
         category: true,
       },
-    });
+    }),
+
+    await prisma.product.count(),
+  ]);
 
   const mappedProducts = products.map((product) =>
     mapProductToUI(product),
   );
+  const totalPages = Math.ceil(totalProducts / pageSize);
 
-  return mappedProducts;
+  return {
+    products: mappedProducts,
+    totalPages: totalPages,
+  };
 }
 
 export async function getCategoryWithProducts(

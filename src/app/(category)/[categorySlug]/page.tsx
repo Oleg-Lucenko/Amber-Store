@@ -12,14 +12,16 @@ export default async function ProductsByCategoryPage(
   {params, searchParams}: { params: params, 
   searchParams: SearchParams}
 ) {
-   const { categorySlug } = await params;
+  const { categorySlug } = await params;
   const searchParamsData = await searchParams;
 
-  const sort = validateProductsQuery(searchParamsData);
+  const result = validateProductsQuery(searchParamsData);
 
-  if (sort === null) {
+  if (result === null) {
     notFound();
   }
+
+  const { sort } = result;
 
   const categoryProducts = await getCategoryWithProducts(
     categorySlug,
