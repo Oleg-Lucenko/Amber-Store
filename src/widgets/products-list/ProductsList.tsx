@@ -61,7 +61,7 @@ export function ProductsList({
       </ul>
 
       {currentPage && totalPages && (
-        <Pagination totalPages={totalPages} currentPage={currentPage} />
+        <Pagination totalPages={totalPages} currentPage={currentPage} sort={sort} />
       )}
     </>
   );

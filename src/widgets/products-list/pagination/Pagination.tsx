@@ -1,13 +1,16 @@
 import Link from "next/link";
 import style from "./pagination.module.scss";
-import { pagesToUi } from "./pagesToUi";
+import { pagesToUi } from "./lib/pagesToUi";
+import { buildCatalogHref } from "./lib/buildCatalogHref";
 
 export default function Pagination({
   currentPage,
   totalPages,
+  sort
 }: {
   currentPage: number;
   totalPages: number;
+  sort?: string
 }) {
   const visiblePageButtons = pagesToUi(currentPage, totalPages);
 
@@ -15,7 +18,8 @@ export default function Pagination({
     <div className={style.paginationContainer}>
       {currentPage > 1 && (
         <Link
-          href={`?page=${currentPage - 1}`}
+          href={buildCatalogHref(currentPage - 1, sort)}
+          aria-label="Previous page"
           className={`${style.pagesBtn} ${style.pageBtnLeft}`}
         ></Link>
       )}
@@ -24,7 +28,7 @@ export default function Pagination({
         {visiblePageButtons.map((visibleButton) => (
           <li key={visibleButton}>
             <Link
-              href={`?page=${visibleButton}`}
+              href={buildCatalogHref(visibleButton, sort)}
               className={`${style.pageLink}
                 ${visibleButton === currentPage ? style.active : ""}`}
             >
@@ -36,7 +40,8 @@ export default function Pagination({
 
       {currentPage < totalPages && (
         <Link
-          href={`?page=${currentPage + 1}`}
+          href={buildCatalogHref(currentPage + 1, sort)}
+          aria-label="Next page"
           className={`${style.pagesBtn} ${style.pageBtnRight}`}
         ></Link>
       )}
