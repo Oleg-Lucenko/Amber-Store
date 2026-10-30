@@ -6,19 +6,19 @@ import { notFound } from "next/navigation";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
-export default async function HomePage({searchParams}: {searchParams: SearchParams}) {
-
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
   const searchParamsData = await searchParams;
-  const result = validateProductsQuery(searchParamsData);
+  const catalogQuery = validateProductsQuery(searchParamsData);
 
-  if (result === null) {
+  if (catalogQuery === null) {
     notFound();
   }
 
-  const {page = 1, sort} = result;
-
-  const {products, totalPages} = await getAllProducts(page, sort);
-
+  const { products, totalPages } = await getAllProducts(catalogQuery);
 
   if (products.length === 0) {
     return <NoProducts />;
@@ -27,7 +27,12 @@ export default async function HomePage({searchParams}: {searchParams: SearchPara
   return (
     <>
       <DiscountsSlider />
-      <ProductsList listName={'All products'} products={products} currentPage={page} totalPages={totalPages} />
+      <ProductsList
+        listName={"All products"}
+        products={products}
+        totalPages={totalPages}
+        catalogQuery={catalogQuery}
+      />
     </>
   );
 }

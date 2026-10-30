@@ -1,0 +1,27 @@
+.controls {
+  display: flex;
+  align-items: flex-end;
+  width: fit-content;
+  max-width: calc(100% - 48px);
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 28px auto;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #dcdad2;
+  border-radius: 10px;
+}
+
+@media (max-width: 520px) {
+  .controls {
+    width: calc(100% - 24px);
+    margin-block: 20px;
+    padding: 16px;
+    gap: 20px;
+
+    > * {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+}

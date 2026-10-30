@@ -1,0 +1,54 @@
+@use '@shared/styles/variables' as *;
+
+.sortGroup {
+  min-width: 0;
+}
+
+.heading {
+  display: block;
+  margin-bottom: 10px;
+  color: #34332d;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sortContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #dcdad2;
+  border-radius: 8px;
+  background: #f3f2ed;
+}
+
+.sortBtn {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 4px 14px;
+  border-radius: 5px;
+  color: #514e44;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background: #e7e4da;
+    color: #24231e;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #827018;
+    outline-offset: 2px;
+  }
+
+  &.active {
+    background: $color-button;
+    color: #24231e;
+    font-weight: 600;
+  }
+}

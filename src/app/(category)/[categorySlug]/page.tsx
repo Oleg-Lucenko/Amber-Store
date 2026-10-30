@@ -15,17 +15,16 @@ export default async function ProductsByCategoryPage(
   const { categorySlug } = await params;
   const searchParamsData = await searchParams;
 
-  const result = validateProductsQuery(searchParamsData);
+  const catalogQuery = validateProductsQuery(searchParamsData);
 
-  if (result === null) {
+  if (catalogQuery === null) {
     notFound();
-  }
+  };
 
-  const { sort } = result;
 
   const categoryProducts = await getCategoryWithProducts(
     categorySlug,
-    sort
+    catalogQuery
   );
 
   if (categoryProducts === null) {
@@ -42,7 +41,7 @@ export default async function ProductsByCategoryPage(
     <ProductsList
       products={products}
       listName={category.name}
-      sort={sort}
+      catalogQuery={catalogQuery}
     />
   );
 };

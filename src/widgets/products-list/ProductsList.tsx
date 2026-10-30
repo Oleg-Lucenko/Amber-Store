@@ -1,39 +1,27 @@
 "use client";
 
 import { ProductListItem } from "@entities/product";
-
 import { AddToCartButton } from "@features/cart";
-
 import { ProductListProps } from "@entities/product/model/types";
 import styles from "./products-list.module.scss";
-import Link from "next/link";
 import Pagination from "./pagination/Pagination";
+import { ProductsControlls } from "./product-controls/ProductsControlls";
+
 
 export function ProductsList({
   listName,
   products,
   totalPages,
-  currentPage,
-  sort,
+  catalogQuery
 }: ProductListProps) {
+
+
   return (
     <>
-      <div className={styles.sortContainer}>
-        <Link
-          href="?sort=asc"
-          className={`${styles.sortBtn} ${sort === "asc" ? styles.active : ""} `}
-        >
-          Lowest price first
-        </Link>
-        <Link
-          href="?sort=desc"
-          className={`${styles.sortBtn} ${sort === "desc" ? styles.active : ""} `}
-        >
-          Highest price first
-        </Link>
-      </div>
 
       {listName && <h1 className={styles.categoryName}>{listName}</h1>}
+
+      <ProductsControlls {...catalogQuery}/>
 
       <ul className={styles.productsList}>
         {products.map((product) => (
@@ -60,8 +48,11 @@ export function ProductsList({
         ))}
       </ul>
 
-      {currentPage && totalPages && (
-        <Pagination totalPages={totalPages} currentPage={currentPage} sort={sort} />
+      {totalPages && (
+        <Pagination
+          totalPages={totalPages}
+          catalogQuery={catalogQuery}
+        />
       )}
     </>
   );

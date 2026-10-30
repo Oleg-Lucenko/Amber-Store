@@ -1,0 +1,91 @@
+@use '@shared/styles/variables' as *;
+
+.priceRange {
+  min-width: 0;
+}
+
+.heading {
+  display: block;
+  margin-bottom: 10px;
+  color: #34332d;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fields {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  width: 124px;
+  min-width: 0;
+  padding: 7px 12px;
+  border: 1px solid #cfcdc3;
+  border-radius: 6px;
+  background: #faf9f6;
+  color: #646259;
+  font-size: 11px;
+
+  &:focus-within {
+    border-color: #827018;
+    outline: 2px solid #ffeb7c;
+    outline-offset: 2px;
+  }
+
+  input {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #24231e;
+    font: inherit;
+    font-size: 14px;
+
+    &::placeholder {
+      color: #79766d;
+    }
+  }
+}
+
+.apply {
+  padding: 0 20px;
+  min-height: 24px;
+  border-radius: 6px;
+  background: $color-button;
+  color: #24231e;
+  font: inherit;
+  font-weight: 600;
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background: $color-btnHover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #827018;
+    outline-offset: 3px;
+  }
+}
+
+@media (max-width: 520px) {
+  .fields {
+    flex-wrap: wrap;
+  }
+
+  .field {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  .apply {
+    flex: 1 0 100%;
+  }
+}

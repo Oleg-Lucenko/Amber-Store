@@ -27,6 +27,15 @@ export type CategoryWithProducts = {
   products: ProductUI[]
 };
 
+export type PriceSort = "asc" | "desc";
+
+export type CatalogQuery = {
+  page: number;
+  sort?: PriceSort;
+  minPrice?: number;
+  maxPrice?: number;
+};
+
 export type ProductCardProps = Pick<
   ProductUI,
   "name" | "imgPath" | "priceDollars" | "description"
@@ -38,8 +47,7 @@ export type ProductListProps = {
   listName: string,
   products: ProductUI[],
   totalPages?: number,
-  currentPage?: number,
-  sort?: 'asc' | 'desc'
+  catalogQuery: CatalogQuery
 };
 
 export type ProductListItemProps = Pick<
@@ -49,10 +57,5 @@ export type ProductListItemProps = Pick<
   actions?: ReactNode;
 };
 
-export type PriceSort = "asc" | "desc";
 
-export type QueryParams = {
-  page?: number,
-  sort?: PriceSort
-};
 

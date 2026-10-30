@@ -11,15 +11,15 @@ export default async function AllProductsPage({
   searchParams: SearchParams;
 }) {
   const searchParamsData = await searchParams;
-  const result = validateProductsQuery(searchParamsData);
+  const catalogQuery = validateProductsQuery(searchParamsData);
 
-  if (result === null) {
+  if (catalogQuery === null) {
     notFound();
   }
 
-  const { page = 1, sort } = result;
 
-  const { products, totalPages } = await getAllProducts(page, sort);
+
+  const { products, totalPages } = await getAllProducts(catalogQuery);
 
   if (products.length === 0) {
     return <NoProducts />;
@@ -30,8 +30,7 @@ export default async function AllProductsPage({
       listName={"All products"}
       products={products}
       totalPages={totalPages}
-      currentPage={page}
-      sort={sort}
+      catalogQuery={catalogQuery}
     />
   );
 }
