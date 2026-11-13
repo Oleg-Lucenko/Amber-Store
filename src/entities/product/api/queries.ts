@@ -21,23 +21,39 @@ function mapProductToUI(product: ProductWithCategory): ProductUI {
   return productUI;
 }
 
+function buildPriceFilter({ minPrice, maxPrice }: CatalogQuery) {
+  return {
+    gte: minPrice === undefined ? undefined : dollarsToCents(minPrice),
+    lte: maxPrice === undefined ? undefined : dollarsToCents(maxPrice),
+  };
+}
+
+async function isProductScopeEmpty(
+  filteredProductsCount: number,
+  categoryId?: number,
+): Promise<boolean> {
+  if (filteredProductsCount > 0) {
+    return false;
+  }
+
+  const product = await prisma.product.findFirst({
+    where: categoryId === undefined ? {} : { categoryId },
+    select: { id: true },
+  });
+
+  return product === null;
+}
+
+// Product queries:
+
 export async function getAllProducts(
   catalogQuery: CatalogQuery,
 ): Promise<ProductsUIData> {
   const where = {
-    price: {
-      gte:
-        catalogQuery.minPrice === undefined
-          ? undefined
-          : dollarsToCents(catalogQuery.minPrice),
-      lte:
-        catalogQuery.maxPrice === undefined
-          ? undefined
-          : dollarsToCents(catalogQuery.maxPrice),
-    },
+    price: buildPriceFilter(catalogQuery),
   };
 
-  const [products, totalProducts] = await Promise.all([
+  const [products, filteredProductsCount] = await Promise.all([
     prisma.product.findMany({
       take: pageSize,
       skip: skip(catalogQuery.page),
@@ -51,12 +67,15 @@ export async function getAllProducts(
     prisma.product.count({ where }),
   ]);
 
+  const isCatalogEmpty = await isProductScopeEmpty(filteredProductsCount);
+
   const mappedProducts = products.map((product) => mapProductToUI(product));
-  const totalPages = Math.ceil(totalProducts / pageSize);
+  const totalPages = Math.ceil(filteredProductsCount / pageSize);
 
   return {
     products: mappedProducts,
-    totalPages: totalPages
+    totalPages: totalPages,
+    isCatalogEmpty,
   };
 }
 
@@ -73,30 +92,32 @@ export async function getCategoryWithProducts(
   if (!category) {
     return null;
   }
+  const where = {
+    categoryId: category.id,
+    price: buildPriceFilter(catalogQuery),
+  };
 
-  const products = await prisma.product.findMany({
-    where: {
-      categoryId: category.id,
-      price: {
-        gte:
-          catalogQuery.minPrice === undefined
-            ? undefined
-            : dollarsToCents(catalogQuery.minPrice),
-        lte:
-          catalogQuery.maxPrice === undefined
-            ? undefined
-            : dollarsToCents(catalogQuery.maxPrice),
+  const [products, filteredProductsCount] = await Promise.all([
+    prisma.product.findMany({
+      where,
+      orderBy: catalogQuery.sort ? { price: catalogQuery.sort } : undefined,
+      include: {
+        category: true,
       },
-    },
-    orderBy: catalogQuery.sort ? { price: catalogQuery.sort } : undefined,
-    include: {
-      category: true,
-    },
-  });
+    }),
+
+    prisma.product.count({ where }),
+  ]);
+
+  const isCatalogEmpty = await isProductScopeEmpty(
+    filteredProductsCount,
+    category.id,
+  );
 
   return {
     category,
     products: products.map((product) => mapProductToUI(product)),
+    isCatalogEmpty,
   };
 }
 

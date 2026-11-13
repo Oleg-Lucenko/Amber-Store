@@ -11,7 +11,7 @@ export default function Pagination({
   totalPages: number;
   catalogQuery: CatalogQuery
 }) {
-  const {page, sort} = catalogQuery;
+  const {page} = catalogQuery;
 
   const visiblePageButtons = pagesToUi(page, totalPages);
 
@@ -19,7 +19,7 @@ export default function Pagination({
     <div className={style.paginationContainer}>
       {page > 1 && (
         <Link
-          href={buildCatalogHref(page - 1, sort)}
+          href={buildCatalogHref({ ...catalogQuery, page: page - 1 })}
           aria-label="Previous page"
           className={`${style.pagesBtn} ${style.pageBtnLeft}`}
         ></Link>
@@ -29,7 +29,7 @@ export default function Pagination({
         {visiblePageButtons.map((visibleButton) => (
           <li key={visibleButton}>
             <Link
-              href={buildCatalogHref(visibleButton, sort)}
+              href={buildCatalogHref({ ...catalogQuery, page: visibleButton })}
               className={`${style.pageLink}
                 ${visibleButton === page ? style.active : ""}`}
             >
@@ -41,7 +41,7 @@ export default function Pagination({
 
       {page < totalPages && (
         <Link
-          href={buildCatalogHref(page + 1, sort)}
+          href={buildCatalogHref({ ...catalogQuery, page: page + 1 })}
           aria-label="Next page"
           className={`${style.pagesBtn} ${style.pageBtnRight}`}
         ></Link>

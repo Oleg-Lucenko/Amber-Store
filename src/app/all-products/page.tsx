@@ -17,12 +17,15 @@ export default async function AllProductsPage({
     notFound();
   }
 
+  const { products, totalPages, isCatalogEmpty } =
+    await getAllProducts(catalogQuery);
 
-
-  const { products, totalPages } = await getAllProducts(catalogQuery);
+  if (isCatalogEmpty) {
+    return <NoProducts title="No products yet." message="Coming soon." />;
+  }
 
   if (products.length === 0) {
-    return <NoProducts />;
+    return <NoProducts title="No products match your filters." />;
   }
 
   return (

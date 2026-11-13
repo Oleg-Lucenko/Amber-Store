@@ -9,22 +9,25 @@ const productWithCategoryArgs = {
   },
 } satisfies Prisma.ProductDefaultArgs;
 
-export type ProductWithCategory = Prisma.ProductGetPayload<typeof productWithCategoryArgs>;
+export type ProductWithCategory = Prisma.ProductGetPayload<
+  typeof productWithCategoryArgs
+>;
 
-export type ProductUI = Omit<Product, 'price'> & {
-  priceDollars: number; 
+export type ProductUI = Omit<Product, "price"> & {
+  priceDollars: number;
   categorySlug: ProductWithCategory["category"]["slug"];
 };
 
-
 export interface ProductsUIData {
-  products: ProductUI[],
-  totalPages: number
-};
+  products: ProductUI[];
+  totalPages: number;
+  isCatalogEmpty: boolean;
+}
 
 export type CategoryWithProducts = {
-  category: Category,
-  products: ProductUI[]
+  category: Category;
+  products: ProductUI[];
+  isCatalogEmpty: boolean;
 };
 
 export type PriceSort = "asc" | "desc";
@@ -44,10 +47,10 @@ export type ProductCardProps = Pick<
 };
 
 export type ProductListProps = {
-  listName: string,
-  products: ProductUI[],
-  totalPages?: number,
-  catalogQuery: CatalogQuery
+  listName: string;
+  products: ProductUI[];
+  totalPages?: number;
+  catalogQuery: CatalogQuery;
 };
 
 export type ProductListItemProps = Pick<
@@ -56,6 +59,3 @@ export type ProductListItemProps = Pick<
 > & {
   actions?: ReactNode;
 };
-
-
-

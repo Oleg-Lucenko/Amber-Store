@@ -1,17 +1,18 @@
 import { ProductsList } from "@widgets/products-list/ProductsList";
 import { getCategoryWithProducts } from "@entities/product/api/queries";
-import { EmptyCategory, validateProductsQuery } from "@entities/product";
+import { NoProducts, validateProductsQuery } from "@entities/product";
 import { notFound } from "next/navigation";
-
 
 type params = Promise<{ categorySlug: string }>;
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
-
-export default async function ProductsByCategoryPage(
-  {params, searchParams}: { params: params, 
-  searchParams: SearchParams}
-) {
+export default async function ProductsByCategoryPage({
+  params,
+  searchParams,
+}: {
+  params: params;
+  searchParams: SearchParams;
+}) {
   const { categorySlug } = await params;
   const searchParamsData = await searchParams;
 
@@ -19,22 +20,25 @@ export default async function ProductsByCategoryPage(
 
   if (catalogQuery === null) {
     notFound();
-  };
-
+  }
 
   const categoryProducts = await getCategoryWithProducts(
     categorySlug,
-    catalogQuery
+    catalogQuery,
   );
 
   if (categoryProducts === null) {
     notFound();
   }
 
-  const { category, products } = categoryProducts;
+  const { category, products, isCatalogEmpty } = categoryProducts;
+
+  if (isCatalogEmpty) {
+    return <NoProducts title="No products in this category yet." />;
+  }
 
   if (products.length === 0) {
-    return <EmptyCategory />;
+    return <NoProducts title="No products match your filters." />;
   }
 
   return (
@@ -44,4 +48,4 @@ export default async function ProductsByCategoryPage(
       catalogQuery={catalogQuery}
     />
   );
-};
+}
